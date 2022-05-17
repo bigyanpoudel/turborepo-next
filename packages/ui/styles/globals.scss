@@ -1,0 +1,213 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input {
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+}
+
+* {
+  @apply border-base-300/50;
+  @apply m-0 p-0;
+}
+
+@layer base {
+  /* Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  .btn-outline.btn-primary,
+  .btn-outline.btn-error {
+    &.btn[disabled],
+    &.btn-disabled {
+      @apply text-base-secondary;
+    }
+  }
+
+  #ct-container {
+    z-index: 9999999 !important;
+  }
+  .btn[disabled],
+  .btn-disabled {
+    @apply bg-base-200;
+  }
+
+  #ct-container {
+    z-index: 9999999 !important;
+  }
+}
+
+@layer components {
+  .btn {
+    white-space: nowrap;
+  }
+  .btn-xs {
+    font-weight: 400;
+  }
+  .btn-md {
+    height: 2.5rem;
+    min-height: 2.5rem;
+  }
+  .btn-lg:not(.btn-circle) {
+    height: 3rem;
+    min-height: 3rem;
+    @apply text-base;
+  }
+
+  .input-sm {
+    height: 2rem !important;
+    min-height: 2rem !important;
+  }
+  .input-md {
+    height: 2.5rem;
+    min-height: 2.5rem;
+  }
+  .input-lg {
+    height: 3rem;
+    min-height: 3rem;
+  }
+
+  .input-disabled,
+  .input[disabled] {
+    @apply bg-base-200 dark:text-color-300;
+  }
+
+  .select-md {
+    height: 2.5rem;
+    min-height: 2.5rem;
+  }
+  .select-lg {
+    height: 3rem;
+    min-height: 3rem;
+  }
+  // .form-control {
+  //   .label-text {
+  //     @apply text-base-secondary;
+  //   }
+  //   &:focus-within {
+  //     .label-text {
+  //       @apply text-primary;
+  //     }
+  //     .input
+  //   }
+  // }
+  .form-control {
+    &:focus-within {
+      .label {
+        @apply text-primary;
+      }
+    }
+  }
+}
+
+@layer utilities {
+  .container {
+    @apply mx-auto px-8;
+  }
+  .row-flex {
+    @apply flex flex-row;
+  }
+
+  .col-flex {
+    @apply flex flex-col;
+  }
+
+  .btn-dashed {
+    @apply btn-outline border-dashed;
+
+    &.btn-primary {
+      @apply hover:bg-opacity-10 hover:text-primary;
+    }
+  }
+  .btn-ghost {
+    @apply hover:bg-primary-bg;
+  }
+
+  .nav-item {
+    position: relative;
+    @apply row-flex justify-center items-center;
+  }
+  .nav-item::after {
+    content: "";
+    // display: block;
+    position: absolute;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background-color: #0f445e;
+    transition: width 0.3s;
+  }
+
+  .nav-item:hover::after {
+    width: 100%;
+    transition: width 0.3s;
+  }
+  .nav-item-box {
+    display: none;
+    position: absolute;
+  }
+  .nav-item:hover {
+    .nav-item-box {
+      display: block;
+      @apply absolute top-12 -left-1/2 z-10;
+    }
+  }
+
+  input:focus + label {
+    @apply text-primary;
+  }
+
+  select:focus + label {
+    @apply text-primary;
+  }
+
+  .select[disabled] {
+    @apply border border-base-content/20;
+  }
+
+  .ReactModal__Overlay {
+    &--after-open {
+      @apply bg-base-content/60 #{!important};
+    }
+  }
+  .ReactModal__Body--open,
+  .ReactModal__Html--open {
+    overflow: hidden;
+  }
+  .ReactModal__Overlay--after-open {
+    background: red !important;
+  }
+
+  .input-group-plain {
+    @apply relative input-group;
+    // @apply relative flex items-stretch w-full;
+
+    & > input.input,
+    & > select.select {
+      @apply rounded-md pl-10;
+
+      &.input-sm,
+      &.select-sm {
+        @apply pl-8;
+      }
+
+      &:not(:last-child) {
+        @apply rounded-r-none;
+      }
+    }
+
+    :where(span:first-child) {
+      @apply absolute bg-transparent top-1/2 -translate-y-1/2 -left-1 text-sm font-semibold;
+    }
+    :where(span:last-child) {
+      @apply relative row-flex items-center bg-transparent border border-l-0 border-base-content/20 px-1;
+      * {
+        @apply border-0;
+      }
+    }
+  }
+}
