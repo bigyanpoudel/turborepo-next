@@ -8,6 +8,7 @@ export const Register = () => {
         <div className="font-semibold">Register</div>
         <div className="col-flex gap-5">
           <Input
+            autoFocus
             label="Name"
             placeholder="Enter name"
             name="name"
@@ -30,6 +31,7 @@ export const Register = () => {
             name="password"
             bordered
             fullWidth
+            type="password"
             inputClassName="input-md"
           />
           <Input
@@ -37,6 +39,7 @@ export const Register = () => {
             placeholder="Enter confirm password"
             name="confirmPassword"
             bordered
+            type="password"
             fullWidth
             inputClassName="input-md"
           />
