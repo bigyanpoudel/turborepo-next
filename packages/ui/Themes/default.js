@@ -40,9 +40,6 @@ module.exports = {
   "--text-color-300":
     "156 163 175" /* Foreground secondary content color to use on base color */,
 
-  // '--shadow-color-100': '76 87 125 / 0.04',
-  // '--shadow-color-200': '164 164 164 / 0.25',
-  // '--shadow-color-300': 'rgba(0,0,0,0.15)',
   "--disabled-color-100": "rgba(24,26,42,0.15)",
   "--primary-bg": "80 72 229 / 0.05",
 
