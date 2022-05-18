@@ -16,7 +16,7 @@ export interface ContextProps {
 
 export const AuthContext = createContext<Partial<ContextProps>>({});
 
-const AuthProvider = (props: any) => {
+export const AuthProvider = (props: any) => {
   const [user, setUser] = useState(null as firebase.User | null);
   const [claims, setClaims] = useState<Claims>({
     isAdmin: false,
@@ -41,13 +41,14 @@ const AuthProvider = (props: any) => {
       }
       setUser(user);
       setAuthenticated(user !== null);
+      setLoading(false);
     });
-    setLoading(false);
   };
 
   if (loading) {
-    return;
+    return <div>Loading</div>;
   }
+
   return (
     <AuthContext.Provider
       value={{
@@ -62,5 +63,3 @@ const AuthProvider = (props: any) => {
     </AuthContext.Provider>
   );
 };
-
-export default AuthProvider;

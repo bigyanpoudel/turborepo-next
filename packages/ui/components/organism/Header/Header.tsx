@@ -1,30 +1,74 @@
 import Link from "next/link";
-export const Header = () => {
-  const navItems = [
-    {
-      title: "Home",
-      url: "/",
-    },
-    {
-      title: "Cart",
-      url: "/cart",
-    },
-    {
-      title: "Login",
-      url: "/login",
-    },
-  ];
+import { useContext } from "react";
+import { AuthContext } from "../../../utils";
+import { firebase } from "../../../utils/";
+import { useRouter } from "next/router";
+export const Header = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
+  const { user, authenticated, claims } = useContext(AuthContext);
+
+  const router = useRouter();
+
+  const logout = async () => {
+    await firebase.auth().signOut();
+    router.push("/login");
+  };
+
   return (
-    <div className="py-4 bg-base-100 shadow-200 container row-flex justify-between items-center sticky top-0">
+    <div className="py-4 bg-base-100 shadow-200  px-10 row-flex justify-between items-center sticky top-0 z-10">
       <div>Logo</div>
       <div className="font-semibold text-lg row-flex">
-        {navItems.map((el, index) => (
-          <Link href={el.url} key={index}>
-            <div className="mr-5 cursor-pointer hover:text-primary nav-item">
-              {el.title}
-            </div>
-          </Link>
-        ))}
+        <Link href="/">
+          <div className="mr-5 cursor-pointer hover:text-primary nav-item">
+            Home
+          </div>
+        </Link>
+
+        {authenticated !== null &&
+          (isAuthenticated && user ? (
+            claims?.isUser ? (
+              <>
+                <Link href="/cart">
+                  <div className="mr-5 cursor-pointer hover:text-primary nav-item">
+                    Cart
+                  </div>
+                </Link>
+                <Link href="/profile">
+                  <div className="mr-5 cursor-pointer hover:text-primary nav-item">
+                    Profile
+                  </div>
+                </Link>
+                <div
+                  className="mr-5 cursor-pointer hover:text-primary nav-item"
+                  onClick={logout}
+                >
+                  Logout
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="mr-5 cursor-pointer hover:text-primary nav-item">
+                  Create
+                </div>
+                <Link href="/profile">
+                  <div className="mr-5 cursor-pointer hover:text-primary nav-item">
+                    Profile
+                  </div>
+                </Link>
+                <div
+                  className="mr-5 cursor-pointer hover:text-primary nav-item"
+                  onClick={logout}
+                >
+                  Logout
+                </div>
+              </>
+            )
+          ) : (
+            <Link href="/login">
+              <div className="mr-5 cursor-pointer hover:text-primary nav-item">
+                Login
+              </div>
+            </Link>
+          ))}
       </div>
     </div>
   );

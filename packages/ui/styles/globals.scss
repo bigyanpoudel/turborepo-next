@@ -210,4 +210,65 @@ input {
       }
     }
   }
+
+  .custom-table {
+    @apply table w-full overflow-x-auto border-collapse mb-8;
+    td,
+    th {
+      @apply py-1 px-4;
+    }
+    thead,
+    tbody,
+    tfoot {
+      td,
+      th {
+        @apply border border-base-300 border-opacity-50 border-t-0;
+        border-radius: 0;
+
+        &:first-child {
+          @apply border-l-0;
+        }
+        &:last-child {
+          @apply border-r-0;
+        }
+      }
+    }
+    thead,
+    tfoot {
+      td:first-child,
+      td:last-child,
+      th:first-child,
+      th:last-child {
+        border-radius: 0 !important;
+      }
+    }
+
+    tbody {
+      td {
+        vertical-align: top;
+      }
+    }
+    thead {
+      td {
+        @apply text-base-content bg-base-200 font-semibold h-[35px];
+      }
+    }
+    .table-head {
+      background-color: #f6f6f6;
+      td {
+        @apply text-gray-400 font-medium text-sm h-[45px];
+      }
+    }
+
+    &.noborder {
+      thead,
+      tbody,
+      tfoot {
+        td,
+        th {
+          @apply border-0;
+        }
+      }
+    }
+  }
 }

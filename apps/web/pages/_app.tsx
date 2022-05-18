@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app";
 import { useEffect } from "react";
-import { ModalWrapper } from "ui";
+import { ModalWrapper, AuthProvider } from "ui";
 import { Modal } from "ui";
 import { Layout } from "../components/organism";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -14,10 +14,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
   return (
     <QueryClientProvider client={queryClient}>
-      <Layout>
-        <Component {...pageProps} />
-        <ModalWrapper ref={(ref) => (modalRef = ref)} />
-      </Layout>
+      <AuthProvider>
+        <Layout>
+          <Component {...pageProps} />
+          <ModalWrapper ref={(ref) => (modalRef = ref)} />
+        </Layout>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

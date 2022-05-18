@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { auth, AuthContext, Button, Input, Toast, firebase } from "ui";
 import { Modal } from "ui";
-import { Register } from "../Register/Register";
 import { useFormik } from "formik";
 import { useMutation } from "react-query";
 import { loginUser } from "../../../service";
@@ -11,17 +10,6 @@ import Router from "next/router";
 export const Login = () => {
   const { claims } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
-
-  const openModal = () => {
-    Modal.open({
-      component: Register,
-      props: {
-        callback: () => {
-          Modal.close();
-        },
-      },
-    });
-  };
 
   const { mutate, isLoading } = useMutation(loginUser, {
     onSuccess: () => {
@@ -47,18 +35,19 @@ export const Login = () => {
         if (user) {
           const idToken = await user!.getIdTokenResult();
           if (idToken.claims.isAdmin) {
-            Router.push("http://localhost:3001/");
+            Router.push("/dashboard");
+            Toast({
+              type: "success",
+              message: "Success",
+              description: "Signed in successfully",
+            });
           } else {
             Router.push("/");
           }
         }
         setLoading(false);
       });
-      Toast({
-        type: "success",
-        message: "Success",
-        description: "Signed in successfully",
-      });
+
       //   router.push("/");
     } catch (error: any) {
       const errorCode = error.code;
@@ -159,15 +148,6 @@ export const Login = () => {
           >
             Login
           </Button>
-          <div className="text-center font-semibold">
-            Do not have account ?
-            <span
-              className="text-lg cursor-pointer text-primary"
-              onClick={openModal}
-            >
-              Register
-            </span>
-          </div>
         </div>
       </div>
     </div>

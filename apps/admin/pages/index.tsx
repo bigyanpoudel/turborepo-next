@@ -1,10 +1,11 @@
-import { Button } from "ui";
-
-export default function Docs() {
+import { Login } from "../components/molecules";
+import PrivateRoute from "../utils/withPrivateRoute";
+const Index = () => {
   return (
     <div>
-      <h1>Docs</h1>
-      <Button />
+      <Login />
     </div>
   );
-}
+};
+
+export default PrivateRoute(Index);

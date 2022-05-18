@@ -64,7 +64,7 @@ export const Input = ({
   label,
 }: InputProps) => {
   return (
-    <div className="form-control h-20">
+    <div className={`form-control ${type !== "textarea" && "h-20"}`}>
       {label && (
         <label className={`label label-text ${error && "text-error"}`}>
           {label}
