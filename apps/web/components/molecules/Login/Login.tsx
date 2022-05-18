@@ -13,6 +13,11 @@ export const Login = () => {
   const openModal = () => {
     Modal.open({
       component: Register,
+      props: {
+        callback: () => {
+          Modal.close();
+        },
+      },
     });
   };
 
@@ -102,7 +107,7 @@ export const Login = () => {
     <div className="w-full h-[80vh] col-flex container  relative justify-center items-center">
       <div className="bg-base-100 shadow-200 rounded-md border-base-100 w-[320px] sm:w-[400px] p-5 col-flex  gap-10 ">
         <div className="font-semibold text-3xl text-center">Login</div>
-        <div className="col-flex gap-5">
+        <div className="col-flex gap-3">
           <Input
             label="Email"
             placeholder="Enter email"
